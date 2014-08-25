@@ -194,16 +194,16 @@ void window_load(Window *window)
   layer_add_child(rootLayer,(Layer*) fuzzy_text_layer_1); //text_layer_get_layer(fuzzy_text_layer_1));
   
   
-  fuzzy_text_layer_2 = text_layer_create(GRect(20, 30, 124, 90));
+  fuzzy_text_layer_2 = text_layer_create(GRect(20, 25, 124, 30));
   text_layer_set_text_color(fuzzy_text_layer_2, GColorClear);
   text_layer_set_background_color(fuzzy_text_layer_2, GColorBlack);
   text_layer_set_font(fuzzy_text_layer_2, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
   text_layer_set_text_alignment(fuzzy_text_layer_2, GTextAlignmentRight);
   layer_add_child(rootLayer,(Layer*) fuzzy_text_layer_2); //text_layer_get_layer(fuzzy_text_layer_2));
   
-  fuzzy_text_layer_3 = text_layer_create(GRect(70, 60, 74, 90));
-  text_layer_set_text_color(fuzzy_text_layer_3, GColorClear);
-  text_layer_set_background_color(fuzzy_text_layer_3, GColorBlack);
+  fuzzy_text_layer_3 = text_layer_create(GRect(70, 50, 74, 30));
+  text_layer_set_text_color(fuzzy_text_layer_3, GColorWhite);
+  text_layer_set_background_color(fuzzy_text_layer_3, GColorClear);
   text_layer_set_font(fuzzy_text_layer_3, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
   text_layer_set_text_alignment(fuzzy_text_layer_3, GTextAlignmentRight);
   layer_add_child(rootLayer,(Layer*) fuzzy_text_layer_3); //text_layer_get_layer(fuzzy_text_layer_3));
@@ -231,21 +231,21 @@ void window_load(Window *window)
   text_layer_set_text_alignment(s_weather_layer, GTextAlignmentLeft);
   text_layer_set_font(s_weather_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
   text_layer_set_text(s_weather_layer, "Yükleniyor...");
+  //Create Location Layer
+  s_location_layer = text_layer_create(GRect(0, 58, 135, 19));
+  text_layer_set_background_color(s_location_layer, GColorClear);
+  text_layer_set_text_color(s_location_layer, GColorWhite);
+  text_layer_set_text_alignment(s_location_layer, GTextAlignmentLeft);
+  text_layer_set_font(s_location_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
+  text_layer_set_text(s_location_layer, "Yüklen");
    //Create Conditions Layer
-  s_conditions_layer = text_layer_create(GRect (0, 58, 70, 19));
+  s_conditions_layer = text_layer_create(GRect (0,77,144,19));
   text_layer_set_background_color(s_conditions_layer, GColorClear);
   text_layer_set_text_color(s_conditions_layer, GColorWhite);
   text_layer_set_text_alignment(s_conditions_layer, GTextAlignmentLeft);
   text_layer_set_font(s_conditions_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
   text_layer_set_text(s_conditions_layer, "Yükleniyor...");
  
-  //Create Location Layer
-  s_location_layer = text_layer_create(GRect(0,77,70,19));
-  text_layer_set_background_color(s_location_layer, GColorClear);
-  text_layer_set_text_color(s_location_layer, GColorWhite);
-  text_layer_set_text_alignment(s_location_layer, GTextAlignmentLeft);
-  text_layer_set_font(s_location_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
-  text_layer_set_text(s_location_layer, "Yüklen");
   //Add Child Layers for both
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_weather_layer));
   layer_add_child(window_get_root_layer(window), text_layer_get_layer(s_conditions_layer));
@@ -254,7 +254,7 @@ void window_load(Window *window)
      
   //Calendar
   calendar = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_CAL);
-  calendar_rect = GRect(1,96,68,73);
+  calendar_rect = GRect(1,100,68,68);
   calendarLayer = bitmap_layer_create(calendar_rect);
   bitmap_layer_set_bitmap(calendarLayer, calendar);
   layer_add_child(rootLayer, bitmap_layer_get_layer(calendarLayer));
@@ -284,7 +284,7 @@ void window_load(Window *window)
   //Bluetooth Layer
   bluetooth = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_BLUETOOTH_CONNECTED);
 	disconnect = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_BLUETOOTH_NOT_CONNECTED);
-  bluetooth_rect = GRect(70,85,20,43);
+  bluetooth_rect = GRect(65,0,20,43);
   bluetoothLayer = bitmap_layer_create(bluetooth_rect);
   bitmap_layer_set_bitmap(bluetoothLayer, bluetooth);
 	layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(bluetoothLayer));
