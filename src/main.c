@@ -1,5 +1,5 @@
 #include <pebble.h>
-#include <pebble_app_info.h>
+//#include <pebble_app_info.h>
 #include <pebble_fonts.h>
 #include <stdio.h>
 #include "turkish_time.h"
@@ -57,6 +57,7 @@ GFont text_font;
 GFont text_font_light;
 GFont bar_font;
 GFont fuzzy_text_font;
+static GFont s_temperature_font;
 
 struct tm *t;
 time_t temp;
@@ -196,7 +197,7 @@ void window_load(Window *window)
   
   fuzzy_text_layer_2 = text_layer_create(GRect(20, 25, 124, 30));
   text_layer_set_text_color(fuzzy_text_layer_2, GColorClear);
-  text_layer_set_background_color(fuzzy_text_layer_2, GColorBlack);
+  text_layer_set_background_color(fuzzy_text_layer_2, GColorClear);
   text_layer_set_font(fuzzy_text_layer_2, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
   text_layer_set_text_alignment(fuzzy_text_layer_2, GTextAlignmentRight);
   layer_add_child(rootLayer,(Layer*) fuzzy_text_layer_2); //text_layer_get_layer(fuzzy_text_layer_2));
@@ -224,22 +225,23 @@ void window_load(Window *window)
 	layer_add_child(window_get_root_layer(window), bitmap_layer_get_layer(batteryLayer));
   
   
-   //Create Temperature Layer
-  s_weather_layer = text_layer_create(GRect (0, 39, 30, 19));
+   //Create Temperature Layer FONT_TWCENMT_LIGHT_25
+  s_weather_layer = text_layer_create(GRect (0, 20, 130, 25));
   text_layer_set_background_color(s_weather_layer, GColorClear);
   text_layer_set_text_color(s_weather_layer, GColorWhite);
   text_layer_set_text_alignment(s_weather_layer, GTextAlignmentLeft);
-  text_layer_set_font(s_weather_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
-  text_layer_set_text(s_weather_layer, "Yükleniyor...");
+  s_temperature_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_TWCENMT_LIGHT_25));
+  text_layer_set_font(s_weather_layer, s_temperature_font);
+  text_layer_set_text(s_weather_layer, "Yükle...");
   //Create Location Layer
-  s_location_layer = text_layer_create(GRect(0, 58, 135, 19));
+  s_location_layer = text_layer_create(GRect(0, 48, 135, 22));
   text_layer_set_background_color(s_location_layer, GColorClear);
   text_layer_set_text_color(s_location_layer, GColorWhite);
   text_layer_set_text_alignment(s_location_layer, GTextAlignmentLeft);
   text_layer_set_font(s_location_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
   text_layer_set_text(s_location_layer, "Yüklen");
    //Create Conditions Layer
-  s_conditions_layer = text_layer_create(GRect (0,77,144,19));
+  s_conditions_layer = text_layer_create(GRect (0,75,144,22));
   text_layer_set_background_color(s_conditions_layer, GColorClear);
   text_layer_set_text_color(s_conditions_layer, GColorWhite);
   text_layer_set_text_alignment(s_conditions_layer, GTextAlignmentLeft);
@@ -274,7 +276,7 @@ void window_load(Window *window)
   text_layer_set_text_alignment(calendar_day_no_text_layer, GTextAlignmentCenter);
   layer_add_child(rootLayer,(Layer*) text_layer_get_layer(calendar_day_no_text_layer));
   //Month
-  calendar_month_text_layer = text_layer_create(GRect(5,140,55,50));
+  calendar_month_text_layer = text_layer_create(GRect(5,142,55,50));
   text_layer_set_text_color(calendar_month_text_layer, GColorBlack);
   text_layer_set_background_color(calendar_month_text_layer, GColorClear);
   //text_layer_set_font(calendar_month_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
@@ -293,15 +295,15 @@ void window_load(Window *window)
   //We will create the creation of windows elements here!
   //WatchLayer Hour
   text_layer = text_layer_create(GRect(90, 100, 54, 68));
-  text_layer_set_background_color(text_layer, GColorBlack);
-  text_layer_set_text_color(text_layer, GColorClear);
+  text_layer_set_background_color(text_layer, GColorClear);
+  text_layer_set_text_color(text_layer, GColorWhite);
   text_layer_set_text_alignment(text_layer, GTextAlignmentRight);
   text_layer_set_font(text_layer,fonts_get_system_font(FONT_KEY_BITHAM_34_MEDIUM_NUMBERS)); //FONT_KEY_GOTHIC_18_BOLD));
   layer_add_child(rootLayer, (Layer*) text_layer);
   //WatchLayer minute
   text_layer_m = text_layer_create(GRect(90, 134, 54, 34));
-  text_layer_set_background_color(text_layer_m, GColorBlack);
-  text_layer_set_text_color(text_layer_m, GColorClear);
+  text_layer_set_background_color(text_layer_m, GColorClear);
+  text_layer_set_text_color(text_layer_m, GColorWhite);
   text_layer_set_text_alignment(text_layer_m, GTextAlignmentRight);
   text_layer_set_font(text_layer_m,fonts_get_system_font(FONT_KEY_BITHAM_34_MEDIUM_NUMBERS)); //FONT_KEY_GOTHIC_18_BOLD));
   layer_add_child(rootLayer, (Layer*) text_layer_m);
